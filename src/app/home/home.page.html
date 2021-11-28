@@ -7,14 +7,57 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <h1>Bienvenido</h1>
+  <div>
+    <h2>Agregar automóvil</h2>
+    <ion-item>
+      <ion-label>ID</ion-label>
+      <ion-input [(ngModel)]="id" disabled="disabled"></ion-input>
+    </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-item>
+      <ion-label>Patente</ion-label>
+      <ion-input [(ngModel)]="patente"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Número de motor</ion-label>
+      <ion-input type="number" [(ngModel)]="numero_motor"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Marca</ion-label>
+      <ion-input [(ngModel)]="marca"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Modelo</ion-label>
+      <ion-input [(ngModel)]="modelo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Número de puertas</ion-label>
+      <ion-input type="number" [(ngModel)]="puertas"></ion-input>
+    </ion-item>
   </div>
+  <ion-button (click)="agregarAuto()">Agregar auto</ion-button>
+  <ion-button (click)="modificarAuto()">Modificar auto</ion-button>
+  <ion-button (click)="eliminarAuto()">Eliminar auto</ion-button>
+
+  <br>
+
+  <div>
+    <h2>Lista de automóviles</h2>
+    <ion-list>
+      <ion-item *ngFor="let a of lista_automoviles" (click)="cargarAuto(a)">
+        <ion-label>ID: {{a.id}}</ion-label>
+        <ion-label>Patente: {{a.patente}}</ion-label>
+        <ion-label>Número del motor: {{a.numero_motor}}</ion-label>
+        <ion-label>Marca: {{a.marca}}</ion-label>
+        <ion-label>Modelo: {{a.modelo}}</ion-label>
+        <ion-label>Cantidad de puertas: {{a.puertas}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>
