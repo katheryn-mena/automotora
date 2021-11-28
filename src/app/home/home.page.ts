@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Automovil } from '../interfaces/automovil';
 import { DatabaseService } from '../services/database.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class HomePage implements OnInit{
 
   lista_automoviles: Automovil[];
 
-  constructor(private database: DatabaseService) {}
+  constructor(private database: DatabaseService, private apiService: ApiService) {}
 
   ngOnInit(){
     this.database.listarTodo('automoviles').then(respuesta=>{
@@ -96,5 +97,72 @@ export class HomePage implements OnInit{
     }).catch(error=>{
       console.log("error: ", error);
     });
+  }
+
+  obtenerPosts(){
+    this.apiService.getPosts().subscribe(
+      (data)=>{
+        console.log(data);
+      },
+      (error)=>{
+        console.log("error: ",error);
+      }
+    );
+  }
+
+  obtenerPost(){
+    this.apiService.getPost(20).subscribe(
+      (data)=>{
+        console.log(data);
+      },
+      (error)=>{
+        console.log("error: ",error);
+      }
+    );
+  }
+
+  agregarPost(){
+    var post={
+      userId: 1,
+      id: 101,
+      title: 'hola mundo',
+      body: 'hola lindo mundo de la programación'
+    };
+    this.apiService.crearPost(post).subscribe(
+      (data)=>{
+        console.log(data);
+      },
+      (error)=>{
+        console.log("error: ",error);
+      }
+    );
+  }
+
+  eliminarPost(){
+    this.apiService.deletePost(20).subscribe(
+      (data)=>{
+        console.log(data);
+      },
+      (error)=>{
+        console.log("error: ",error);
+      }
+    );
+  }
+
+  modificarPost(){
+    var post={
+      userId: 1,
+      id: 101,
+      title: 'hola mundito',
+      body: ''
+    };
+    this.apiService.modificarPost(20, post).subscribe(
+      (data)=>{
+        console.log(data);
+      },
+      (error)=>{
+        console.log("error: ",error);
+      }
+    );
   }
 }
